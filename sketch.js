@@ -6,10 +6,9 @@ const Body = Matter.Body;
 
 var paperball;
 
-function preload()
-{
+
 	
-}
+
 
 function setup() {
 	createCanvas(800, 700);
@@ -19,10 +18,12 @@ function setup() {
 	world = engine.world;
 
 	//Create the Bodies Here.
-	paperball = new Paper(0,690,10)
+	paperball = new Paper(100,200,40)
 	paperball.shapeColor = "red"
 	
-	dustbin1 = new Dustbin(750,20)
+	dustbin1 = new Dustbin(600,670,100,50)
+
+	ground = new Ground(400,690,800,20)
 
 	Engine.run(engine);
   
@@ -35,6 +36,12 @@ function draw() {
   Engine.update(engine)
   paperball.display()
   dustbin1.display()
+  ground.display()
+
+  if(keyDown(UP_ARROW))
+  {
+	Matter.Body.applyForce(paperball.body,paperball.body.position,{x:1,y:-5})
+  }
   drawSprites();
  
 }
